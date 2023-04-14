@@ -21,6 +21,8 @@
             {{/userName}}
             <!-- 해당 값이 존재하지 않는 경우 ^ 사용 -->
             {{^userName}}
+                <!--  application-oauth.properties 에 등록한 redirect-uri 값에 맞춰 자동으로 등록된다 -->
+                <!--  /oauth2/authorization/ 까지 고정 -->
                 <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
                 <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
             {{/userName}}

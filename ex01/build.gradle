@@ -41,6 +41,10 @@ dependencies {
     // 데이터베이스 세션 저장소 사용 
     implementation('org.springframework.session:spring-session-jdbc')
 
+    // 스프링 시큐리티 설정으로 인해 인증되지 않은 사용자의 요청은 이동된다.
+    // 임의로 인증된 사용자를 추가하여 API를 테스트한다
+    testImplementation('org.springframework.security:spring-security-test')
+
 
 }
 

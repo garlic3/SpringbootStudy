@@ -50,8 +50,29 @@ QueryDSL
   - (2) 데이터베이스 세션 저장소로 사용: DB IO 발생 가능성, 백오피스, 사내 시스템 용도에 적합
   - (3) Redis, Memcached 메모리 DB 세션 저장소로 사용: 실제 서비스시 외부 메모리 서버 필요
 
+클라우드
+  - 클라우드를 통해 서버, 스토리지, 데이터베이스, 네트웨크, 소프트웨어, 모니터링 등의 서비스를 제공받는다
+  - (1) Infrastructure as a Service(IaaS) : 물리장비들과 미들웨어를 묶어둔 추상화 서비스
+  - 가상머신, 스토리지, 네트워크, 운영체제 등의 IT 인프라 대여 서비스. AWS EC2, S3 등
+  - (2) Platform as a Service(PaaS) : IaaS를 한번더 추상화 한 서비스
+  - AWS Beanstalk(빈스톡), Heroku(헤로쿠) 등
+  - (3) Software as a Service(SaaS) : 소프웨어 서비스
+  - 구글 드라이브, 드랍박스, 와탭 등
 
+AWS EC2
+  - t2.micro 사용 가능(vCPU 1 Core. 가상 CPU, 메모리 1GB) -> vCPU는 물리 CPU 사양의 절반정도의 성능을 가진다
+  - 월 750시간 제한
+  - AMI(Amazon Machine Image) : 인스턴스 가상 머신에 운영체제 등을 설치할수 있게 생성된 이미지
+  - Amazon Linux AMI : 레드햇 베이스, AWS 서비스와의 상성이 좋음, Amazon의 독자적인 개발 레포지토리를 사용하고 있어 yum이 빠름
+  - 인스턴스 유형: t2-> 요금 타입 micro -> 사양 
 
+  - 인스턴스 설정 및 시작 -> 탄력적 IP 부여, 보안그룹 체크 -> pem 키 저장 및 복사 -> JDK 설치
+  - JDK 11 설치 : yum list java* -> sudo yum install java-11-amazon-corretto-devel.x86_64
+    -> 인스턴스 JAVA 버전 목록 확인 sudo /usr/sbin/alternatives --config java
+  - 타임존 변경 : sudo rm /etc/localtime -> sudo ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+  - HostName 변경 : sudo vim /etc/sysconfig/network -> sudo vim /etc/hosts 
+  - Mysql CLI 설치 : wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
+  -> ls -rlt -> sudo yum install  mysql80-community-release-el9-1.noarch.rpm
 
 
 

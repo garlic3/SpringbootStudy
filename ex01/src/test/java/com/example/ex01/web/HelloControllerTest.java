@@ -1,9 +1,13 @@
 package com.example.ex01.web;
 
+import com.example.ex01.config.auth.SecurityConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -14,7 +18,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // 스프링 부트 테스트와 Junit 연결
 @RunWith(SpringRunner.class)
 // 컨트롤러 테스트를 위해 사용
-@WebMvcTest(controllers = HelloController.class)
+// @WebMvcTest 어노테이션은 WebSecurityConfiguerAdpater, WebMvcConfigurer, @ControllerAdvice, @Controller를 읽는다
+// @Repository, @Service, @Component 는 스캔 대상이 아니어서 스캔대상에 추가한다
+@WebMvcTest(controllers = HelloController.class, excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)})
 public class HelloControllerTest {
     // 스프링 빈 주입
     @Autowired
@@ -22,6 +28,7 @@ public class HelloControllerTest {
     // 스프링 MVC 테스트의 시작점
     private MockMvc mvc;
 
+    @WithMockUser(roles = "USER")
     @Test
     public void helloTest() throws Exception {
         String hello = "hello";
@@ -32,6 +39,7 @@ public class HelloControllerTest {
                 .andExpect(content().string(hello));
     }
 
+    @WithMockUser(roles = "USER")
     @Test
     public void helloDtoTest() throws Exception {
         String name = "hello";

@@ -26,6 +26,11 @@ public class OAuthAttributes {
     }
 
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes){
+        // 네이버 로그인시
+        if("naver".equals(registrationId)){
+            return ofNaver("id", attributes);
+        }
+        // 구글 로그인시
         return ofGoogle(userNameAttributeName, attributes);
     }
 
@@ -38,9 +43,20 @@ public class OAuthAttributes {
                 .build();
     }
 
+    private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes){
+        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+        return OAuthAttributes.builder()
+                .name((String)response.get("name")).email((String)response.get("email"))
+                .picture((String)response.get("profile_image")).attributes(response)
+                .nameAttributeKey(userNameAttributeName).build();
+    }
+
     // User 엔티티 생성
     // 가입할떄의 기본권한 GUEST
     public Users toEntity(){
         return Users.builder().name(name).email(email).picture(picture).role(Role.GUEST).build();
     }
+
+
 }
+
