@@ -74,5 +74,8 @@ AWS EC2
   - Mysql CLI 설치 : wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
   -> ls -rlt -> sudo yum install  mysql80-community-release-el9-1.noarch.rpm
 
-
+CI & CD
+  - CI(Continuous Integration 지속적 통합): VCS 시스템(Git, SVN)에 Push가 되면 자동으로 테스트와 빌드를 수행하여 안정적인 배포 파일을 만드는 과정
+  - CD(Continuous Deployment 지속적인 배포): 빌드 결과를 자동으로 운영 서버에 무중단 배포까지 진행하는 과정
+  - 
 
