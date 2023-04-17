@@ -44,6 +44,7 @@ public class HelloControllerTest {
     public void helloDtoTest() throws Exception {
         String name = "hello";
         int amount = 1000;
+        // Test
 
         // param() : 요청 파라미터 설정(String만 허용)
         // jsonPath() : JSON 응답값을 필드별로 검증할수 있는 메소드, $를 기준으로 필드명 명시
