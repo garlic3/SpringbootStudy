@@ -1,6 +1,5 @@
 language: java
-jdk: -openjdk11
-
+jdk: openjdk11
 # Travis CI를 어느 브랜치로 푸시할지 지정
 branches:
   only:
@@ -11,7 +10,13 @@ cache: # 그레이들로 의존성을 받게되면 해당 디렉토리에 캐시
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/ .gradle'
-script: "./gradlew clean build" # push 되었을때 수행하는 명령어
+script:
+   # push 되었을때 수행하는 명령어
+  wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+  chmod +x $TRAVIS_BUILD_DIR/install-jdk.sh
+  export JAVA_HOME=$HOME/openjdk11
+  $TRAVIS_BUILD_DIR/install-jdk.sh -F 11 --target $JAVA_HOME
+  ./gradlew clean build
 
 # CI 실행 완료시 메일로 알람
 notifications:
