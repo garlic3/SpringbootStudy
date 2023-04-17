@@ -3,7 +3,7 @@ jdk: openjdk11
 # Travis CI를 어느 브랜치로 푸시할지 지정
 branches:
   only:
-    - main
+    - master
 
 # Travis CI 서버의 home
 cache: # 그레이들로 의존성을 받게되면 해당 디렉토리에 캐시한다. 같은 의존성은 다음 배포부터 다시 받지 않도록 설정
@@ -11,7 +11,7 @@ cache: # 그레이들로 의존성을 받게되면 해당 디렉토리에 캐시
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
 script: "./gradlew clean build" # push 되었을때 수행하는 명령어
-   
+
 # CI 실행 완료시 메일로 알람
 notifications:
   email:
